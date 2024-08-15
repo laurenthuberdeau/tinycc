@@ -838,7 +838,7 @@ again:
         if (opcode >= TOK_ASM_first && opcode <= TOK_ASM_last) {
             int b;
             b = op0_codes[opcode - TOK_ASM_first];
-            if (b & 0xff00) 
+            if (b & 0xff00)
                 g(b >> 8);
             g(b);
             return;

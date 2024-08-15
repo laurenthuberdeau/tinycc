@@ -1,6 +1,6 @@
 /*
  *  X86 code generator for TCC
- * 
+ *
  *  Copyright (c) 2001-2004 Fabrice Bellard
  *
  * This library is free software; you can redistribute it and/or
@@ -31,7 +31,7 @@
 #define RC_INT     0x0001 /* generic integer register */
 #define RC_FLOAT   0x0002 /* generic float register */
 #define RC_EAX     0x0004
-#define RC_ST0     0x0008 
+#define RC_ST0     0x0008
 #define RC_ECX     0x0010
 #define RC_EDX     0x0020
 #define RC_EBX     0x0040
@@ -421,7 +421,7 @@ ST_FUNC void gfunc_call(int nb_args)
 {
     int size, align, r, args_size, i, func_call;
     Sym *func_sym;
-    
+
     args_size = 0;
     for(i = 0;i < nb_args; i++) {
         if ((vtop->type.t & VT_BTYPE) == VT_STRUCT) {
@@ -618,7 +618,7 @@ ST_FUNC void gfunc_epilog(void)
         /* generate bound local allocation */
         saved_ind = ind;
         ind = func_bound_ind;
-        sym_data = get_sym_ref(&char_pointer_type, lbounds_section, 
+        sym_data = get_sym_ref(&char_pointer_type, lbounds_section,
                                func_bound_offset, lbounds_section->data_offset);
         greloc(cur_text_section, sym_data,
                ind + 1, R_386_32);
@@ -782,7 +782,7 @@ ST_FUNC void gen_opi(int op)
             r = vtop[-1].r;
             fr = vtop[0].r;
             o((opc << 3) | 0x01);
-            o(0xc0 + r + fr * 8); 
+            o(0xc0 + r + fr * 8);
         }
         vtop--;
         if (op >= TOK_ULT && op <= TOK_GT) {
@@ -954,7 +954,7 @@ ST_FUNC void gen_opf(int op)
             load(TREG_ST0, vtop);
             swapped = !swapped;
         }
-        
+
         switch(op) {
         default:
         case '+':
@@ -1015,7 +1015,7 @@ ST_FUNC void gen_cvt_itof(int t)
         o(0x50 + (vtop->r & VT_VALMASK)); /* push r */
         o(0x242cdf); /* fildll (%esp) */
         o(0x08c483); /* add $8, %esp */
-    } else if ((vtop->type.t & (VT_BTYPE | VT_UNSIGNED)) == 
+    } else if ((vtop->type.t & (VT_BTYPE | VT_UNSIGNED)) ==
                (VT_INT | VT_UNSIGNED)) {
         /* unsigned int to float/double/long double */
         o(0x6a); /* push $0 */
